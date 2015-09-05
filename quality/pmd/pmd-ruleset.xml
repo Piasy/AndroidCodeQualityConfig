@@ -51,6 +51,11 @@
 
         <!-- annoying -->
         <exclude name="AvoidFinalLocalVariable"/>
+
+        <!-- Singleton usage -->
+        <exclude name="AvoidUsingVolatile"/>
+
+        <exclude name="AvoidPrefixingMethodParameters"/>
     </rule>
     <rule ref="rulesets/java/coupling.xml">
         <!-- this is too strictly -->
