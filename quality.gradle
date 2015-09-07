@@ -46,13 +46,15 @@ task checkstyle(type: Checkstyle, group: 'verification') {
     classpath = files()
 }
 
-task findbugs(type: FindBugs, dependsOn: assemble, group: 'verification') {
+findbugs {
+    toolVersion = "3.0.1"
     ignoreFailures = false
     effort = "max"
     reportLevel = "high"
     excludeFilter = new File("${project.rootDir}/AndroidCodeQualityConfig/quality/findbugs/findbugs-filter.xml")
+}
+task findbugs(type: FindBugs, dependsOn: assemble, group: 'verification') {
     classes = files("${project.rootDir}/${project.getName()}/build/intermediates/classes")
-
     source 'src'
     include '**/*.java'
     exclude '**/gen/**'
