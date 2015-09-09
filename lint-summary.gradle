@@ -51,7 +51,7 @@ class LintSummaryTask extends DefaultTask implements BuildListenerAdapter {
             filePath = [project.projectDir, "build", "outputs", "lint-results.xml"].join(File.separator)
         }
         project.exec {
-            commandLine "android-lint-summary", "-v", filePath
+            commandLine "bash", "-c", "android-lint-summary", "-v", filePath
             standardOutput = stdout
         }
     }
