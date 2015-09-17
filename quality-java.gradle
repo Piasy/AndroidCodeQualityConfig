@@ -28,6 +28,7 @@ apply plugin: 'pmd'
 
 // Add checkstyle, findbugs, pmd to the check task.
 check.dependsOn 'checkstyle', 'findbugs', 'pmd'
+compileJava.dependsOn 'checkstyle'
 
 checkstyle {
     // will fire "java.lang.ClassNotFoundException: com.puppycrawl.tools.checkstyle
