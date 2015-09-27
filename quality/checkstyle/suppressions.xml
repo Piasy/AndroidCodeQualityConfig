@@ -31,7 +31,11 @@
 <suppressions>
     <suppress checks="[a-zA-Z0-9]*" files="R.java" />
     <suppress checks="[a-zA-Z0-9]*" files="BuildConfig.java" />
+    <suppress checks="[a-zA-Z0-9]*" files="test" />
     <suppress checks="[a-zA-Z0-9]*" files="Test" />
+    <suppress checks="JavadocPackage" files="debug" />
+    <suppress checks="JavadocPackage" files="espresso" />
+    <suppress checks="JavadocPackage" files="release" />
     <suppress checks="[a-zA-Z0-9]*" files="Dagger*" />
     <suppress checks="[a-zA-Z0-9]*" files=".*_.*Factory.java" />
     <suppress checks="[a-zA-Z0-9]*" files=".*ViewInjector.java" />
