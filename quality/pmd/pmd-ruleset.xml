@@ -60,6 +60,7 @@
     <rule ref="rulesets/java/coupling.xml">
         <!-- this is too strictly -->
         <exclude name="LawOfDemeter"/>
+        <exclude name="ExcessiveImports"/>
     </rule>
     <rule ref="rulesets/java/design.xml"/>
     <rule ref="rulesets/java/empty.xml"/>
@@ -72,6 +73,7 @@
     <rule ref="rulesets/java/junit.xml">
         <!-- mockito assert -->
         <exclude name="JUnitTestsShouldIncludeAssert"/>
+        <exclude name="JUnitTestContainsTooManyAsserts"/>
     </rule>
     <rule ref="rulesets/java/logging-java.xml"/>
 

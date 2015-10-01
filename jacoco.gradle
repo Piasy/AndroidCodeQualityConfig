@@ -27,9 +27,7 @@
  */
 def ignoredByJacoco = [
         'presentation',
-        'once',
-        'HandyWidgets',
-        'centertitlesidebuttonbar'
+        'EasyFlow',
 ]
 
 /**
