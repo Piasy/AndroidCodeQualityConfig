@@ -37,7 +37,14 @@
     <rule ref="rulesets/java/basic.xml"/>
     <rule ref="rulesets/java/braces.xml"/>
     <rule ref="rulesets/java/clone.xml"/>
-    <rule ref="rulesets/java/codesize.xml"/>
+    <rule ref="rulesets/java/codesize.xml">
+        <exclude name="TooManyMethods"/>
+    </rule>
+    <rule ref="rulesets/java/codesize.xml/TooManyMethods">
+        <properties>
+            <property name="maxmethods" value="20"/>
+        </properties>
+    </rule>
     <rule ref="rulesets/java/comments.xml">
         <exclude name="CommentSize"/>
         <!-- javadoc is checked by checkstyle -->
@@ -62,7 +69,9 @@
         <exclude name="LawOfDemeter"/>
         <exclude name="ExcessiveImports"/>
     </rule>
-    <rule ref="rulesets/java/design.xml"/>
+    <rule ref="rulesets/java/design.xml">
+        <exclude name="UncommentedEmptyMethodBody"/>
+    </rule>
     <rule ref="rulesets/java/empty.xml"/>
     <rule ref="rulesets/java/finalizers.xml"/>
     <rule ref="rulesets/java/imports.xml">
