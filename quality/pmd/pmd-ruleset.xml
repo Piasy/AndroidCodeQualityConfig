@@ -31,6 +31,7 @@
 
     <exclude-pattern>.*/R.java</exclude-pattern>
     <exclude-pattern>.*/gen/.*</exclude-pattern>
+    <exclude-pattern>.*/test/.*</exclude-pattern>
 
     <rule ref="rulesets/java/android.xml"/>
 
