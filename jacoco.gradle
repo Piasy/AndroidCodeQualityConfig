@@ -35,7 +35,7 @@ def ignoredByJacoco = [
  * */
 def moduleClassDirs = [
         'common'        : 'build/classes',
-        'common-android': 'build/intermediates/classes/debug',
+        'common_android': 'build/intermediates/classes/debug',
         'model'         : 'build/intermediates/classes/debug',
         'presentation'  : 'build/intermediates/classes/debug'
 ]
@@ -45,7 +45,7 @@ def moduleClassDirs = [
  * */
 def moduleJacocoExec = [
         'common'        : 'build/jacoco/test.exec',
-        'common-android': 'build/jacoco/testDebugUnitTest.exec',
+        'common_android': 'build/jacoco/testDebugUnitTest.exec',
         'model'         : 'build/jacoco/testDebugUnitTest.exec',
         'presentation'  : 'build/jacoco/testDebugUnitTest.exec'
 ]
@@ -67,7 +67,7 @@ def moduleExcludes = [
                 // test code
                 '**/**Test.**',
         ],
-        'common-android': [
+        'common_android': [
                 // Android framework related
                 '**/R*.class',
                 '**/BuildConfig.**',
