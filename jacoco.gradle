@@ -23,100 +23,13 @@
  */
 
 /**
- *  List of modules that don't require Jacoco
- */
-def ignoredByJacoco = [
-        'presentation',
-        'EasyFlow',
-]
-
-/**
- * module class dirs
- * */
-def moduleClassDirs = [
-        'common'        : 'build/classes',
-        'common_android': 'build/intermediates/classes/debug',
-        'model'         : 'build/intermediates/classes/debug',
-        'presentation'  : 'build/intermediates/classes/debug'
-]
-
-/**
- * module jacoco exec
- * */
-def moduleJacocoExec = [
-        'common'        : 'build/jacoco/test.exec',
-        'common_android': 'build/jacoco/testDebugUnitTest.exec',
-        'model'         : 'build/jacoco/testDebugUnitTest.exec',
-        'presentation'  : 'build/jacoco/testDebugUnitTest.exec'
-]
-
-/**
- * module excludes
- * */
-def moduleExcludes = [
-        'common'        : [
-                // plain code
-                '**/Constants.**',
-                '**/Constants$**.**',
-                '**/AutoGenTypeAdapterFactory.**',
-
-                // di code
-                '**/**Module.**',
-                '**/**Module_**.**',
-
-                // test code
-                '**/**Test.**',
-        ],
-        'common_android': [
-                // Android framework related
-                '**/R*.class',
-                '**/BuildConfig.**',
-                '**/ToastUtilImpl**',
-                '**/ScreenUtil.**',
-
-                // Android framework delegate implementation
-                '**/**DelegateImpl.**',
-
-                // di code
-                '**/**Module.**',
-                '**/**Module_**.**',
-
-                // test code
-                '**/BaseThreeTenBPTest.**',
-                '**/**Test.**',
-        ],
-        'model'         : [
-                // Android framework related
-                '**/R*.class',
-                '**/BuildConfig*',
-                '**/DBOpenHelper.**',
-
-                // Android framework delegate implementation
-                '**/**DelegateImpl.**',
-                '**/**TableMeta.**',
-                '**/**TableMeta$**.**',
-
-                // di code
-                '**/**Module.**',
-                '**/**Module_**.**',
-
-                // test code
-                '**/**Test.**',
-        ],
-        'presentation'  : [
-                '**/R*.class',
-                '**/BuildConfig*'
-        ]
-]
-
-/**
  *  Apply additional build steps to sub-projects
  */
 subprojects { prj ->
 
     // Apply Jacoco only if the project is not in the ignore list
     logger.debug("subprojects: " + prj.name)
-    if (!ignoredByJacoco.contains(prj.name)) {
+    if (!rootProject.ext.ignoredByJacoco.contains(prj.name)) {
         apply plugin: 'jacoco'
 
         jacoco {
@@ -133,20 +46,20 @@ subprojects { prj ->
             }
 
             classDirectories = fileTree(
-                    dir: moduleClassDirs[prj.name]
+                    dir: rootProject.ext.moduleClassDirs[prj.name]
             )
 
             afterEvaluate {
                 classDirectories = files(classDirectories.files.collect {
-                    fileTree(dir: it, exclude: moduleExcludes[prj.name])
+                    fileTree(dir: it, exclude: rootProject.ext.moduleExcludes[prj.name])
                 })
             }
 
             sourceDirectories = files('src/main/java')
-            executionData = files(moduleJacocoExec[prj.name])
+            executionData = files(rootProject.ext.moduleJacocoExec[prj.name])
 
             doFirst {
-                renameClasses(prj.name + File.separator + moduleClassDirs[prj.name])
+                renameClasses(prj.name + File.separator + rootProject.ext.moduleClassDirs[prj.name])
             }
         }
     }
@@ -168,7 +81,7 @@ task jacocoFullReport(type: JacocoReport, group: 'Coverage reports') {
     // Get list of projects which should be included in the report
     def projects = new ArrayList()
     subprojects.each { prj ->
-        if (!ignoredByJacoco.contains(prj.name)) {
+        if (!rootProject.ext.ignoredByJacoco.contains(prj.name)) {
             projects.add(prj)
         }
     }
@@ -178,7 +91,8 @@ task jacocoFullReport(type: JacocoReport, group: 'Coverage reports') {
 
     additionalSourceDirs = generateSourceFiles(projects)
     sourceDirectories = generateSourceFiles(projects)
-    classDirectories = generateClassDirs(projects, moduleClassDirs, moduleExcludes)
+    classDirectories = generateClassDirs(projects, rootProject.ext.moduleClassDirs,
+            rootProject.ext.moduleExcludes)
     executionData = files(projects.jacocoReport.executionData)
 
     reports {
@@ -215,7 +129,8 @@ FileCollection generateSourceFiles(Collection projects) {
  *  Generate a FileCollection of all projects class files
  */
 FileCollection generateClassDirs(Collection projects, moduleClassDirs, moduleExcludes) {
-    def tree = fileTree('directory does not exists') // I know it's ugly :)
+    def tree = fileTree('directory does not exists')
+    // I know it's ugly :)
 
     projects.each { prj ->
         //noinspection GrReassignedInClosureLocalVar

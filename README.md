@@ -17,3 +17,9 @@ Code quality config for android project, including lint, pmd, findbugs, checksty
 +  [PMD](https://github.com/pmd/pmd)
 
 ## Lint
+
+## Jacoco
+`apply from: 'AndroidCodeQualityConfig/jacoco.gradle'`
+
+then define `ignoredByJacoco` array in your root project ext part to define ignoring module, and `moduleClassDirs`,
+`moduleJacocoExec`, `moduleExcludes` for each not ignoring module.
