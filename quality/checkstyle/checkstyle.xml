@@ -308,6 +308,7 @@
             <property name="ignoreAnnotationCanonicalNames" value="Inject"/>
             <property name="ignoreAnnotationCanonicalNames" value="Bind"/>
             <property name="ignoreAnnotationCanonicalNames" value="Arg"/>
+            <property name="ignoreAnnotationCanonicalNames" value="AutoBundleField"/>
         </module>
 
         <!-- Checks that classes (except abtract one) define a ctor and don't rely on the default one. !-->
