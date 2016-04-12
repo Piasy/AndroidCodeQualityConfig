@@ -64,6 +64,8 @@
         <exclude name="AvoidUsingVolatile"/>
 
         <exclude name="AvoidPrefixingMethodParameters"/>
+
+        <exclude name="OnlyOneReturn"/>
     </rule>
     <rule ref="rulesets/java/coupling.xml">
         <!-- this is too strictly -->
