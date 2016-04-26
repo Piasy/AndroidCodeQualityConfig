@@ -86,6 +86,7 @@
         <!-- mockito assert -->
         <exclude name="JUnitTestsShouldIncludeAssert"/>
         <exclude name="JUnitTestContainsTooManyAsserts"/>
+        <exclude name="JUnitAssertionsShouldIncludeMessage"/>
     </rule>
     <rule ref="rulesets/java/logging-java.xml"/>
 
