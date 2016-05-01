@@ -103,7 +103,9 @@
     <issue id="NamespaceTypo" severity="ignore" />
     <issue id="NestedScrolling" severity="ignore" />
     <issue id="NestedWeights" severity="error" />
-    <issue id="NewApi" severity="ignore" />
+    <issue id="NewApi">
+        <ignore regexp="Try-with-resources requires API level 19"/>
+    </issue>
     <issue id="NotSibling" severity="ignore" />
     <issue id="ObsoleteLayoutParam" severity="ignore" />
     <issue id="OldTargetApi" severity="ignore" />
