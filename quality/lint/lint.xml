@@ -80,7 +80,7 @@
     <issue id="InnerclassSeparator" severity="ignore" />
     <issue id="Instantiatable" severity="ignore" />
     <issue id="InvalidId" severity="error" />
-    <issue id="InvalidPackage" severity="warning" />
+    <issue id="InvalidPackage" severity="ignore" />
     <issue id="JavascriptInterface" severity="ignore" />
     <issue id="LabelFor" severity="ignore" />
     <issue id="LibraryCustomView" severity="ignore" />
