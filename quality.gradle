@@ -28,7 +28,8 @@ apply plugin: 'pmd'
 
 // Add checkstyle, findbugs, pmd and lint to the check task.
 check.dependsOn 'checkstyle', 'findbugs', 'pmd', 'lint'
-preBuild.dependsOn 'checkstyle'
+// to speed up Instant Run
+//preBuild.dependsOn 'checkstyle'
 
 checkstyle {
     // will fire "java.lang.ClassNotFoundException: com.puppycrawl.tools.checkstyle
