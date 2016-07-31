@@ -304,9 +304,10 @@
             <property name="protectedAllowed" value="true"/>
             <property name="publicMemberPattern" value="^serialVersionUID$"/>
 
-            <!-- ignore fields annotated with @Inject, @Bind and @Arg-->
+            <!-- ignore fields annotated with @Inject, @Bind, @Arg, @BindView, @AutoBundleField-->
             <property name="ignoreAnnotationCanonicalNames" value="Inject"/>
             <property name="ignoreAnnotationCanonicalNames" value="Bind"/>
+            <property name="ignoreAnnotationCanonicalNames" value="BindView"/>
             <property name="ignoreAnnotationCanonicalNames" value="Arg"/>
             <property name="ignoreAnnotationCanonicalNames" value="AutoBundleField"/>
         </module>
