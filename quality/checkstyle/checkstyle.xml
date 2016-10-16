@@ -132,7 +132,7 @@
         <!-- Checks the policy on how to wrap lines on operators. !-->
         <!-- See http://checkstyle.sf.net/config_whitespace.html !-->
         <module name="OperatorWrap">
-            <property name="option" value="eol"/>
+            <property name="option" value="nl"/>
             <property name="tokens" value="ASSIGN, BAND, BOR, BSR, BXOR, COLON, DIV,
                                            EQUAL, GE, GT, LAND, LE, LITERAL_INSTANCEOF,
                                            LOR, LT, MINUS, MOD, NOT_EQUAL,
@@ -304,11 +304,10 @@
             <property name="protectedAllowed" value="true"/>
             <property name="publicMemberPattern" value="^serialVersionUID$"/>
 
-            <!-- ignore fields annotated with @Inject, @Bind, @Arg, @BindView, @AutoBundleField-->
+            <!-- ignore fields annotated with @Inject, @BindView, @BindViews, @AutoBundleField-->
             <property name="ignoreAnnotationCanonicalNames" value="Inject"/>
-            <property name="ignoreAnnotationCanonicalNames" value="Bind"/>
             <property name="ignoreAnnotationCanonicalNames" value="BindView"/>
-            <property name="ignoreAnnotationCanonicalNames" value="Arg"/>
+            <property name="ignoreAnnotationCanonicalNames" value="BindViews"/>
             <property name="ignoreAnnotationCanonicalNames" value="AutoBundleField"/>
         </module>
 
