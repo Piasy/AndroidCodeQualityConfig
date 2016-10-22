@@ -304,11 +304,12 @@
             <property name="protectedAllowed" value="true"/>
             <property name="publicMemberPattern" value="^serialVersionUID$"/>
 
-            <!-- ignore fields annotated with @Inject, @BindView, @BindViews, @AutoBundleField-->
+            <!-- ignore fields annotated with @Inject, @BindView, @BindViews, @AutoBundleField, @VisibleForTesting-->
             <property name="ignoreAnnotationCanonicalNames" value="Inject"/>
             <property name="ignoreAnnotationCanonicalNames" value="BindView"/>
             <property name="ignoreAnnotationCanonicalNames" value="BindViews"/>
             <property name="ignoreAnnotationCanonicalNames" value="AutoBundleField"/>
+            <property name="ignoreAnnotationCanonicalNames" value="VisibleForTesting"/>
         </module>
 
         <!-- Checks that classes (except abtract one) define a ctor and don't rely on the default one. !-->

@@ -110,4 +110,3 @@ android {
         lintConfig file("${project.rootDir}/AndroidCodeQualityConfig/quality/lint/lint.xml")
     }
 }
-apply from: "${project.rootDir}/AndroidCodeQualityConfig/lint-summary.gradle"
