@@ -59,7 +59,7 @@ findbugs {
     reportLevel = "high"
     excludeFilter = new File("${project.rootDir}/AndroidCodeQualityConfig/quality/findbugs/findbugs-filter.xml")
 }
-task findbugs(type: FindBugs, dependsOn: assemble, group: 'verification') {
+task findbugs(type: FindBugs, dependsOn: "assemble", group: 'verification') {
     classes = files("${project.rootDir}/${project.getName()}/build/intermediates/classes")
     source 'src'
     include '**/*.java'
