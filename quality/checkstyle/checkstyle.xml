@@ -192,14 +192,14 @@
         <!-- See http://checkstyle.sf.net/config_naming.html !-->
         <module name="LocalFinalVariableName">
             <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>
-            <property name="tokens" value="VARIABLE_DEF, PARAMETER_DEF"/>
+            <property name="tokens" value="VARIABLE_DEF"/>
         </module>
 
         <!-- Checks for local variable name naming conventions. !-->
         <!-- See http://checkstyle.sf.net/config_naming.html !-->
         <module name="LocalVariableName">
             <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>
-            <property name="tokens" value="VARIABLE_DEF, PARAMETER_DEF"/>
+            <property name="tokens" value="VARIABLE_DEF"/>
         </module>
 
         <!-- Checks for member variable name naming conventions. !-->
