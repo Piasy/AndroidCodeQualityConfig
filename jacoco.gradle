@@ -1,15 +1,19 @@
 /**
  *  Apply additional build steps to sub-projects
  */
+def jacocoToolVersion = rootProject.ext.has('jacocoVersion') ? rootProject.ext.jacocoVersion : '0.7.7.201606060606'
+def moduleExcludes = rootProject.ext.has('moduleExcludes') ? rootProject.ext.moduleExcludes : [:]
+def ignoredByJacoco = rootProject.ext.has('ignoredByJacoco') ? rootProject.ext.ignoredByJacoco : []
+
 subprojects { prj ->
 
     // Apply Jacoco only if the project is not in the ignore list
     logger.debug("subprojects: " + prj.name)
-    if (!rootProject.ext.ignoredByJacoco.contains(prj.name)) {
+    if (!ignoredByJacoco.contains(prj.name)) {
         apply plugin: 'jacoco'
 
         jacoco {
-            version rootProject.ext.jacocoVersion
+            version jacocoToolVersion
         }
 
         task jacocoReport(type: JacocoReport, dependsOn: 'test') {
@@ -22,20 +26,20 @@ subprojects { prj ->
             }
 
             classDirectories = fileTree(
-                    dir: rootProject.ext.moduleClassDirs[prj.name]
+                    dir: 'build/intermediates/classes/debug'
             )
 
             afterEvaluate {
                 classDirectories = files(classDirectories.files.collect {
-                    fileTree(dir: it, exclude: rootProject.ext.moduleExcludes[prj.name])
+                    fileTree(dir: it, exclude: [prj.name] ?: [])
                 })
             }
 
             sourceDirectories = files('src/main/java')
-            executionData = files(rootProject.ext.moduleJacocoExec[prj.name])
+            executionData = files('build/jacoco/testDebugUnitTest.exec')
 
             doFirst {
-                renameClasses(prj.name + File.separator + rootProject.ext.moduleClassDirs[prj.name])
+                renameClasses(prj.name + '/build/intermediates/classes/debug')
             }
         }
     }
@@ -44,7 +48,7 @@ subprojects { prj ->
 apply plugin: 'jacoco'
 
 jacoco {
-    toolVersion rootProject.ext.jacocoVersion
+    toolVersion jacocoToolVersion
 }
 
 /**
@@ -57,7 +61,7 @@ task jacocoFullReport(type: JacocoReport, group: 'Coverage reports') {
     // Get list of projects which should be included in the report
     def projects = new ArrayList()
     subprojects.each { prj ->
-        if (!rootProject.ext.ignoredByJacoco.contains(prj.name)) {
+        if (!ignoredByJacoco.contains(prj.name)) {
             projects.add(prj)
         }
     }
@@ -67,8 +71,7 @@ task jacocoFullReport(type: JacocoReport, group: 'Coverage reports') {
 
     additionalSourceDirs = generateSourceFiles(projects)
     sourceDirectories = generateSourceFiles(projects)
-    classDirectories = generateClassDirs(projects, rootProject.ext.moduleClassDirs,
-            rootProject.ext.moduleExcludes)
+    classDirectories = generateClassDirs(projects, moduleExcludes)
     executionData = files(projects.jacocoReport.executionData)
 
     reports {
@@ -104,15 +107,15 @@ FileCollection generateSourceFiles(Collection projects) {
 /**
  *  Generate a FileCollection of all projects class files
  */
-FileCollection generateClassDirs(Collection projects, moduleClassDirs, moduleExcludes) {
+FileCollection generateClassDirs(Collection projects, moduleExcludes) {
     def tree = fileTree('directory does not exists')
     // I know it's ugly :)
 
     projects.each { prj ->
         //noinspection GrReassignedInClosureLocalVar
         tree += fileTree(
-                dir: "${prj.name}/${moduleClassDirs[prj.name]}",
-                excludes: moduleExcludes[prj.name]
+                dir: "${prj.name}/build/intermediates/classes/debug",
+                excludes: moduleExcludes[prj.name] ?: []
         )
     }
 
