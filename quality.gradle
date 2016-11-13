@@ -78,13 +78,11 @@ task pmd(type: Pmd, group: 'verification') {
     }
 }
 
-afterEvaluate {
-    android {
-        lintOptions {
-            abortOnError true
-            xmlReport true
-            htmlReport true
-            lintConfig file("${project.rootDir}/AndroidCodeQualityConfig/quality/lint/lint.xml")
-        }
+android {
+    lintOptions {
+        abortOnError true
+        xmlReport true
+        htmlReport true
+        lintConfig file("${project.rootDir}/AndroidCodeQualityConfig/quality/lint/lint.xml")
     }
 }

@@ -8,7 +8,9 @@ Code quality config for android project, including lint, pmd, findbugs, checksty
   +  step 3. `apply from: '../AndroidCodeQualityConfig/quality.gradle'` for android module then run `gradle check`
   +  step 4. no more step 4 :).
 
-If you have many modules, you can add below code into your root project's `build.gradle` and skip step 3:
+If you have many modules, you have another option:
+
++ step 3. add below code into your root project's `build.gradle`:
 
 ``` gradle
 subprojects {
@@ -20,7 +22,21 @@ subprojects {
 }
 ```
 
-Notice: You should first remove check.dependsOn 'checkstyle', 'findbugs', 'pmd', 'lint' in quality.gradle. [See more](https://github.com/Piasy/AndroidCodeQualityConfig/issues/3).
++ step 4. remove `check.dependsOn 'checkstyle', 'findbugs', 'pmd', 'lint'` in quality.gradle.
++ step 5. change the last paragraph of quality.gradle into this:
+
+``` gradle
+afterEvaluate {
+    android {
+        lintOptions {
+            abortOnError true
+            xmlReport true
+            htmlReport true
+            lintConfig file("${project.rootDir}/AndroidCodeQualityConfig/quality/lint/lint.xml")
+        }
+    }
+}
+```
 
 ## CheckStyle
 +  [CheckStyle](https://github.com/checkstyle/checkstyle)
