@@ -27,6 +27,7 @@
         <exclude name="CommentSize"/>
         <!-- javadoc is checked by checkstyle -->
         <exclude name="CommentRequired"/>
+        <exclude name="CommentDefaultAccessModifier"/>
     </rule>
     <rule ref="rulesets/java/controversial.xml">
         <exclude name="AtLeastOneConstructor"/>
