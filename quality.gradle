@@ -2,9 +2,13 @@ apply plugin: 'checkstyle'
 apply plugin: 'findbugs'
 apply plugin: 'pmd'
 
+def isJava = plugins.hasPlugin('java')
 // Add checkstyle, findbugs, pmd and lint to the check task.
-check.dependsOn 'checkstyle', 'findbugs', 'pmd', 'lint'
-
+// Comment it if already set in root project's build.gradle.
+check.dependsOn 'checkstyle', 'findbugs', 'pmd'
+if (!isJava) {
+    check.dependsOn 'lint'
+}
 
 checkstyle {
     // will fire "java.lang.ClassNotFoundException: com.puppycrawl.tools.checkstyle
@@ -38,7 +42,11 @@ findbugs {
 }
 
 task findbugs(type: FindBugs, dependsOn: "assemble", group: 'verification') {
-    classes = files("${project.rootDir}/${project.getName()}/build/intermediates/classes")
+    if (isJava) {
+        classes = files("${project.rootDir}/${project.getName()}/build/classes")
+    } else {
+        classes = files("${project.rootDir}/${project.getName()}/build/intermediates/classes")
+    }
     source 'src'
     include '**/*.java'
     exclude '**/gen/**'
@@ -82,20 +90,21 @@ task pmd(type: Pmd, group: 'verification') {
     }
 }
 
+if (!isJava) {
+    android {
+        lintOptions {
+            abortOnError true
+            xmlReport true
+            htmlReport true
+            lintConfig file("${project.rootDir}/AndroidCodeQualityConfig/quality/lint/lint.xml")
+        }
 
-android {
-    lintOptions {
-        abortOnError true
-        xmlReport true
-        htmlReport true
-        lintConfig file("${project.rootDir}/AndroidCodeQualityConfig/quality/lint/lint.xml")
-    }
-
-    testOptions.unitTests.all {
-        testLogging {
-            events 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
-            outputs.upToDateWhen { false }
-            showStandardStreams = true
+        testOptions.unitTests.all {
+            testLogging {
+                events 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
+                outputs.upToDateWhen { false }
+                showStandardStreams = true
+            }
         }
     }
 }
