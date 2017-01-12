@@ -105,6 +105,7 @@ if (!isJava) {
                 outputs.upToDateWhen { false }
                 showStandardStreams = true
             }
+            jvmArgs '-noverify'
         }
     }
 }
