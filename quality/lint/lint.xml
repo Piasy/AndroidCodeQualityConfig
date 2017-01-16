@@ -154,5 +154,4 @@
     <issue id="WrongManifestParent" severity="ignore" />
     <issue id="WrongViewCast" severity="error" />
     <issue id="GoogleAppIndexingWarning" severity="ignore" />
-    <issue id="RestrictedApi" severity="ignore" />
 </lint>
