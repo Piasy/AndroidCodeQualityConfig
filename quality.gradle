@@ -43,9 +43,9 @@ findbugs {
 
 task findbugs(type: FindBugs, dependsOn: "assemble", group: 'verification') {
     if (isJava) {
-        classes = files("${project.rootDir}/${project.getName()}/build/classes")
+        classes = files("$projectDir.absolutePath/build/classes")
     } else {
-        classes = files("${project.rootDir}/${project.getName()}/build/intermediates/classes")
+        classes = files("$projectDir.absolutePath/build/intermediates/classes")
     }
     source 'src'
     include '**/*.java'
@@ -55,10 +55,10 @@ task findbugs(type: FindBugs, dependsOn: "assemble", group: 'verification') {
         xml.enabled = false
         html.enabled = true
         xml {
-            destination "${project.rootDir}/${project.getName()}/build/reports/findbugs/findbugs.xml"
+            destination "$projectDir.absolutePath/build/reports/findbugs/findbugs.xml"
         }
         html {
-            destination "${project.rootDir}/${project.getName()}/build/reports/findbugs/findbugs.html"
+            destination "$projectDir.absolutePath/build/reports/findbugs/findbugs.html"
         }
     }
 
@@ -79,13 +79,13 @@ task pmd(type: Pmd, group: 'verification') {
     exclude '**/gen/**'
 
     reports {
-        xml.enabled = false
+        xml.enabled = true
         html.enabled = true
         xml {
-            destination "${project.rootDir}/${project.getName()}/build/reports/pmd/pmd.xml"
+            destination "$projectDir.absolutePath/build/reports/pmd/pmd.xml"
         }
         html {
-            destination "${project.rootDir}/${project.getName()}/build/reports/pmd/pmd.html"
+            destination "$projectDir.absolutePath/build/reports/pmd/pmd.html"
         }
     }
 }
