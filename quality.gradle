@@ -11,8 +11,6 @@ if (!isJava) {
 }
 
 checkstyle {
-    // will fire "java.lang.ClassNotFoundException: com.puppycrawl.tools.checkstyle
-    // .CheckStyleTask" with version 6.10.1
     toolVersion '7.4'
 
     configFile file("${project.rootDir}/AndroidCodeQualityConfig/quality/checkstyle/checkstyle.xml")
@@ -109,3 +107,5 @@ if (!isJava) {
         }
     }
 }
+
+apply from: rootProject.file('AndroidCodeQualityConfig/jacoco.gradle')
