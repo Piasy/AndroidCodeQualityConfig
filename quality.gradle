@@ -74,7 +74,7 @@ pmd {
 task pmd(type: Pmd, group: 'verification') {
     source 'src'
     include '**/*.java'
-    exclude '**/gen/**'
+    exclude('**/gen/**', '**/debug/**')
 
     reports {
         xml.enabled = true
@@ -91,9 +91,12 @@ task pmd(type: Pmd, group: 'verification') {
 if (!isJava) {
     android {
         lintOptions {
+            disable 'NewApi' // gradle build will compile code use `Objects.requireNonNull()` for lambda
             abortOnError true
             xmlReport true
+            xmlOutput project.file('build/reports/lint/lint-report.xml')
             htmlReport true
+            htmlOutput project.file('build/reports/lint/lint-report.html')
             lintConfig file("${project.rootDir}/AndroidCodeQualityConfig/quality/lint/lint.xml")
         }
 
