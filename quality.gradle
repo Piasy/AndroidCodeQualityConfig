@@ -50,8 +50,9 @@ task findbugs(type: FindBugs, dependsOn: "assemble", group: 'verification') {
     exclude '**/gen/**'
 
     reports {
+        // FindBugs tasks can only have one report enabled
         xml.enabled = false
-        html.enabled = true
+        html.enabled = !xml.enabled
         xml {
             destination "$projectDir.absolutePath/build/reports/findbugs/findbugs.xml"
         }
