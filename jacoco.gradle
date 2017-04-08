@@ -4,7 +4,7 @@ def jacocoToolVersion = rootProject.ext.has('jacocoVersion') ? rootProject.ext.j
 def moduleExcludes = rootProject.ext.has('moduleExcludes') ? rootProject.ext.moduleExcludes : [:]
 def ignoredByJacoco = rootProject.ext.has('ignoredByJacoco') ? rootProject.ext.ignoredByJacoco : []
 
-if (shouldApplyJacoco(project)) {
+if (shouldApplyJacoco(project, ignoredByJacoco)) {
     apply plugin: 'jacoco'
 
     jacoco {
@@ -60,7 +60,7 @@ void renameClasses(String rootPath) {
     }
 }
 
-boolean shouldApplyJacoco(Project project) {
+boolean shouldApplyJacoco(Project project, List<String> ignoredByJacoco) {
     def ignored = ignoredByJacoco.contains(project.name)
     def isJava = project.plugins.hasPlugin("java")
     def isAndroid = project.plugins.hasPlugin("com.android.library") || plugins.hasPlugin(
