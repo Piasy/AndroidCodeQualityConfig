@@ -18,11 +18,11 @@ if (shouldApplyJacoco(project, ignoredByJacoco)) {
         reports {
             html {
                 enabled true
-                destination 'build/reports/jacoco/full'
+                destination file('build/reports/jacoco/full')
             }
             xml {
                 enabled true
-                destination 'build/reports/jacoco/full/jacocoFullReport.xml'
+                destination file('build/reports/jacoco/full/jacocoFullReport.xml')
             }
         }
 
